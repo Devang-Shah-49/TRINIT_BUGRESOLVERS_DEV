@@ -1,4 +1,5 @@
 import React from 'react'
+import CarouselFadeExample from './Carousel'
 
 export default function Introduction() {
   return (
@@ -16,6 +17,7 @@ export default function Introduction() {
           </p>
         </div>
       </div>
+      <CarouselFadeExample/>
     </div>
   )
 }

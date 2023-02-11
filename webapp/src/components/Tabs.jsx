@@ -12,17 +12,17 @@ export default function Tabs() {
       <Tab.Group>
         <Tab.List
           // as={Fragment}
-          className="mt-4 flex items-center justify-center w-1/2 rounded-xl bg-indigo-600 lg:mx-80 px-1"
+          className="mt-4 flex items-center justify-center w-1/2 rounded-xl bg-indigo-600 lg:mx-96 p-1"
         >
           <Tab
             index={1}
             className={({ selected }) =>
               classNames(
-                "w-full rounded-lg py-2.5 text-md font-medium leading-5 text-indigo-600",
+                "w-full rounded-lg py-3.5 text-md font-medium leading-5 text-indigo-600",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                 selected
                   ? "bg-white shadow text-indigo-600"
-                  : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                  : "text-white hover:bg-white/[0.12] hover:text-white"
               )
             }
           >
@@ -32,11 +32,11 @@ export default function Tabs() {
             index={1}
             className={({ selected }) =>
               classNames(
-                "w-full rounded-lg py-2.5 text-md font-medium leading-5 text-indigo-600",
+                "w-full rounded-lg py-3.5 text-md font-medium leading-5 text-indigo-600",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                 selected
                   ? "bg-white shadow text-indigo-600"
-                  : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                  : "text-white hover:bg-white/[0.12] hover:text-white"
               )
             }
           >
@@ -46,11 +46,11 @@ export default function Tabs() {
             index={1}
             className={({ selected }) =>
               classNames(
-                "w-full rounded-lg py-2.5 text-md font-medium leading-5 text-indigo-600",
+                "w-full rounded-lg py-3.5 text-md font-medium leading-5 text-indigo-600",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                 selected
                   ? "bg-white shadow text-indigo-600"
-                  : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                  : "text-white hover:bg-white/[0.12] hover:text-white"
               )
             }
           >
@@ -64,7 +64,7 @@ export default function Tabs() {
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
                 selected
                   ? "bg-white shadow text-indigo-600"
-                  : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                  : "text-white hover:bg-white/[0.12] hover:text-white"
               )
             }
           >
