@@ -1,14 +1,18 @@
 import "./App.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Navigate,
   Route,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import Home from "./pages/Home";
 import { appContext } from "./context";
 import { BubbleChart } from "./components/BubbleChart";
+
+const queryClient = new QueryClient();
 
 function App() {
   const [token, setToken] = useState(null);
@@ -21,15 +25,18 @@ function App() {
   // }, [])
   return (
     <div className="App">
-      <appContext.Provider value={context}>
-        <Router>
-          <Routes>
-            <Route exact path="/home" element={<Home />} />
-            <Route exact path="/" element={<BubbleChart />} />
-            <Route path="*" element={<Navigate replace to="/home" />} />
-          </Routes>
-        </Router>
-      </appContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <appContext.Provider value={context}>
+          <Router>
+            <Routes>
+              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/" element={<BubbleChart />} />
+              <Route path="*" element={<Navigate replace to="/home" />} />
+            </Routes>
+          </Router>
+        </appContext.Provider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </div>
   );
 }

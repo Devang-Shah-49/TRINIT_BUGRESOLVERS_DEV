@@ -11,7 +11,7 @@ users_bp = Blueprint(
 )
 
 
-@users_bp.route('/', methods=["POST"])
+@users_bp.route('', methods=["POST"])
 def addUser():
     try:
         username = request.json["username"]
@@ -31,7 +31,7 @@ def addUser():
         return Argument
 
 
-@users_bp.route('/', methods=["GET"])
+@users_bp.route('', methods=["GET"])
 def getUser():
     try:
         username = request.args.to_dict()["username"]

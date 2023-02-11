@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { appContext } from "../context";
+import AuthServices from "../services/AuthServices";
 
-export default function Login() {
+export default function Login({ closeModal }) {
+  const { setUser } = useContext(appContext);
   const [load, setLoad] = useState(false);
   const [json, setJson] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const handleChange = (e) => {
@@ -14,14 +17,6 @@ export default function Login() {
   return (
     <>
       <div className=" w-full grid grid-flow-row grid-cols-2 min-h-screen">
-        {/* <div className="w-full col-span-1 border border-gray-300">
-          <img
-            src="https://images.unsplash.com/photo-1675110352424-488badf8709b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            alt=""
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-          />
-        </div> */}
-
         <div className="w-max col-span-1">
           <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
@@ -39,16 +34,15 @@ export default function Login() {
                 <input type="hidden" name="remember" defaultValue="true" />
                 <div className="-space-y-px rounded-md shadow-sm">
                   <div>
-                    <label htmlFor="email-address" className="sr-only">
-                      Email address
+                    <label htmlFor="username" className="sr-only">
+                      Username
                     </label>
                     <input
-                      name="email"
-                      type="email"
-                      autoComplete="email"
+                      name="username"
+                      type="text"
                       required
                       className="relative block w-full rounded-md my-4  border border-gray-300 px-3 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      placeholder="Email address"
+                      placeholder="Username"
                       onChange={handleChange}
                     />
                   </div>
@@ -96,11 +90,26 @@ export default function Login() {
 
                 <div>
                   <button
+                    disabled={load}
                     type="button"
-                    onClick={() => {}}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setLoad(true)
+                      AuthServices.login(json)
+                        .then(res => {
+                          console.log(res)
+                          setUser(res.data.user);
+                        })
+                        .finally(() => {
+                          setLoad(false)
+                          closeModal();
+                        })
+                    }}
                     className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      {load ? `Loading` : ''}
+                    </span>
                     Sign in
                   </button>
                 </div>
