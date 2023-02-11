@@ -1,6 +1,11 @@
 import random
 import numpy as np
 from difflib import SequenceMatcher
+import pusher
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Clustering():
@@ -8,6 +13,17 @@ class Clustering():
         self.num_of_means = num_of_means
         self.data = []
         self.schema = schema
+        self.cluster = {}
+        self.pusher_client = pusher.Pusher(
+            app_id=os.environ["PUSHER_APP_ID"],
+            key=os.environ["PUSHER_KEY"],
+            secret=os.environ["PUSHER_SECRET"],
+            cluster=os.environ["PUSHER_CLUSTER"],
+            ssl=True
+        )
+
+    def addData(self, data):
+        self.data = data
 
     def updateData(self, row):
         self.data.append(row)
@@ -99,6 +115,12 @@ class Clustering():
                 if i not in initial[min_dist_clust]:
                     initial[min_dist_clust].append(i)
             # print(initial)
+            #### PUSHER ####
+            self.pusher_client.trigger(
+                'clustering',
+                'iter_cluster',
+                initial
+            )
             fin_li.append(initial)
             num_of_iter = num_of_iter-1
             for z, l in initial.items():
@@ -109,4 +131,11 @@ class Clustering():
         r = np.argmin(final_li)
         op = fin_li[r]
         # print(final_li, op)
+        self.cluster = op
+        #### PUSHER ####
+        self.pusher_client.trigger(
+            'clustering',
+            'final_cluster',
+            op
+        )
         return op
