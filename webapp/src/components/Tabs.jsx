@@ -1,6 +1,8 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
 import Introduction from "./Introduction";
+import FileUpload from "./FileUpload";
+import ViewClusters from "./ViewClusters";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -82,11 +84,13 @@ export default function Tabs() {
             <Tab.Panel>
                 <>
                     {/* Add code/component for tab2 - upload data*/}
+                    <FileUpload />
                 </>
             </Tab.Panel>
             <Tab.Panel>
                 <>
                     {/* Add code/component for tab3 - view clusters */}
+                    <ViewClusters />
                 </>
             </Tab.Panel>
             <Tab.Panel>
