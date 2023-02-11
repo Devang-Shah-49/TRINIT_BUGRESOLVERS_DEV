@@ -1,16 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { appContext } from "../context";
-// import AuthServices from "../services/AuthServices";
-import { useNavigate } from "react-router-dom";
+import AuthServices from "../services/AuthServices";
 
-export default function Signup() {
-  let navigate = useNavigate();
+export default function Signup({ closeModal }) {
   const { setUser, setToken } = useContext(appContext);
   const [load, setLoad] = useState(false);
-  const [status, setStatus] = useState();
-  const [authEmail, setAuthEmail] = useState();
-  const [tempToken, setTempToken] = useState();
-  const [otpJson, setOtpJson] = useState("");
   const [json, setJson] = useState({
     name: "",
     email: "",
@@ -25,37 +19,16 @@ export default function Signup() {
 
   const handleClick = async () => {
     setLoad(true);
-    // await AuthServices.signup(json).then((res) => {
-    //   setLoad(false);
-    //   setStatus(res.status);
-    //   setTempToken(res.data.data.token);
-    //   setAuthEmail(res.data.data.authEmailId);
-    //   console.log(res);
-    // });
+    await AuthServices.signup(json).then((res) => {
+      // setLoad(false);
+      // setStatus(res.status);
+      // setTempToken(res.data.data.token);
+      // setAuthEmail(res.data.data.authEmailId);
+      console.log(res);
+      closeModal();
+      setLoad(false);
+    });
   };
-
-  const handleOTPClick = async () => {
-    setLoad(true);
-    const payload = {
-      emailOtp: otpJson,
-      authEmailId: authEmail,
-    };
-    // await AuthServices.verifyOTP(payload, tempToken).then((res) => {
-    //   console.log(res);
-    //   setToken(res.data.data.token);
-    //   localStorage.setItem("appToken", res.data.data.token);
-    //   setUser(res.data.data.user);
-    //   localStorage.setItem("appUser", JSON.stringify(res.data.data.user));
-    //   localStorage.setItem("isAuthorized", true);
-    //   navigate("/committee");
-    // });
-  };
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("isAuthorized")) {
-  //     navigate("/committee");
-  //   }
-  // }, [navigate]);
 
   return (
     <>
@@ -78,30 +51,15 @@ export default function Signup() {
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
                     <div>
-                      <label htmlFor="name" className="sr-only">
-                        Name
+                      <label htmlFor="username" className="sr-only">
+                        Username
                       </label>
                       <input
-                        name="name"
+                        name="username"
                         type="text"
-                        autoComplete="name"
                         required
                         className="relative block w-full rounded-md my-4  border border-gray-300 px-3 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Name"
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email-address" className="sr-only">
-                        Email address
-                      </label>
-                      <input
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        className="relative block w-full rounded-md my-4  border border-gray-300 px-3 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                        placeholder="Email address"
+                        placeholder="Username"
                         onChange={handleChange}
                       />
                     </div>

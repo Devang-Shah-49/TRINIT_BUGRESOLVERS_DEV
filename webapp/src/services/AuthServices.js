@@ -1,14 +1,14 @@
-import httpCommon from "../http-common";
+import { axiosClient } from "../axios";
 
 const login = (data) => {
-    return httpCommon.post(`/api/auth/signin`, data);
+  return axiosClient.post(`/user/login`, data);
 };
 
 const signup = (data) => {
-    return httpCommon.post(`/api/auth/signup`, data);
+  return axiosClient.post(`/user`, data);
 };
 
 export default {
-    login,
-    signup
-}
+  login,
+  signup,
+};

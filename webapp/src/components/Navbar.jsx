@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import {
   ArrowPathIcon,
@@ -18,6 +18,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Modal from "./Modal";
 import Login from "./Login";
 import Signup from "./Signup";
+import { appContext } from "../context";
 
 const solutions = [
   {
@@ -101,6 +102,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const { user, setUser } = useContext(appContext);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   return (
@@ -127,24 +129,40 @@ export default function Navbar() {
             </Popover.Button>
           </div>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <button
-              onClick={() => setIsLoginOpen(true)}
-              className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Sign in
-            </button>
-            <Modal isOpen={isLoginOpen} setIsOpen={setIsLoginOpen}>
-              <Login />
-            </Modal>
-            <button 
-              onClick={() => setIsSignUpOpen(true)}
-              className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            >
-              Sign up
-            </button>
-            <Modal isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen}>
-              <Signup />
-            </Modal>
+            {user === null ? (
+              <>
+                <button
+                  onClick={() => setIsLoginOpen(true)}
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Sign in
+                </button>
+                <Modal isOpen={isLoginOpen} setIsOpen={setIsLoginOpen}>
+                  <Login closeModal={() => setIsLoginOpen(false)} />
+                </Modal>
+                <button
+                  onClick={() => setIsSignUpOpen(true)}
+                  className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                >
+                  Sign up
+                </button>
+                <Modal isOpen={isSignUpOpen} setIsOpen={setIsSignUpOpen}>
+                  <Signup closeModal={() => setIsSignUpOpen(false)} />
+                </Modal>
+              </>
+            ) : (
+              <>
+                <p>Hello, {user.username}</p>
+                <button
+                  onClick={() => {
+                    setUser(null)
+                  }}
+                  className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                >
+                  Log out
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
