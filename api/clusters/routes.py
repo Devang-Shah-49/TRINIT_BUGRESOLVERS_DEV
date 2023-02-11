@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from .cluster import Clustering
 import pandas as pd
 import numpy as np
@@ -45,6 +45,17 @@ def uploadData():
         print(Argument)
         return Argument
 
+@cluster_bp.route('/get-files', methods=["GET"])
+def getFiles():
+    try:
+        userid = request.args.to_dict()["userid"]
+        files = mongoClient["data"].find({
+            "userid": userid
+        })
+
+        return jsonify(files)
+    except Exception as Argument:
+        return Argument
 
 @cluster_bp.route('/formation', methods=["POST"])
 def getCluster():
