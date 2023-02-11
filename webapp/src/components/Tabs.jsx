@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
+import Introduction from "./Introduction";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -75,6 +76,7 @@ export default function Tabs() {
             <Tab.Panel>
                 <>
                     {/* Add code/component for tab1 - intro*/}
+                    <Introduction />
                 </>
             </Tab.Panel>
             <Tab.Panel>
