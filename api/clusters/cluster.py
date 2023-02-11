@@ -116,11 +116,11 @@ class Clustering():
                     initial[min_dist_clust].append(i)
             # print(initial)
             #### PUSHER ####
-            self.pusher_client.trigger(
-                'clustering',
-                'iter_cluster',
-                initial
-            )
+            # self.pusher_client.trigger(
+            #     'clustering',
+            #     'iter_cluster',
+            #     initial
+            # )
             fin_li.append(initial)
             num_of_iter = num_of_iter-1
             for z, l in initial.items():
@@ -133,9 +133,9 @@ class Clustering():
         # print(final_li, op)
         self.cluster = op
         #### PUSHER ####
-        self.pusher_client.trigger(
-            'clustering',
-            'final_cluster',
-            op
-        )
+        # self.pusher_client.trigger(
+        #     'clustering',
+        #     'final_cluster',
+        #     op
+        # )
         return op
