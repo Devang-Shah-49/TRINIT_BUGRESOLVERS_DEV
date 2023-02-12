@@ -12,6 +12,24 @@ cluster_bp = Blueprint(
     'cluster_bp', __name__,
 )
 
+def prepro(hdf):
+#   hdf = pd.read_csv('/content/hepatitis_csv.csv',sep='[:,|_;]')
+  boolean_columns = hdf.select_dtypes(include=[object]).columns.tolist()
+  numeric_columns = hdf.select_dtypes(include=np.number).columns
+  for v in numeric_columns:
+    val = hdf[v].median()
+    hdf[v].fillna(val,inplace=True)
+  for d in boolean_columns:
+    hdf[d].fillna(hdf[d].mode()[0],inplace=True)
+  for s in hdf.columns:
+    ls=hdf[s].unique()
+    if(len(ls)==2):
+      a = {ls[1] : 1,ls[0] : 0}
+      hdf[s] = hdf[s].map(a)
+  for i in hdf.columns:
+    if (hdf[i].isna().sum() == len(hdf)):
+      hdf[i].fillna(0,inplace=True)
+  return hdf
 
 @cluster_bp.route('/data', methods=["POST"])
 def uploadData():
@@ -24,7 +42,7 @@ def uploadData():
             df = pd.read_csv(request.files["data"])
         else:
             df = pd.read_excel(request.files["data"])
-
+        df = prepro(df)
         schema = list(zip(df.columns.tolist(), datatype.split(',')))
 
         dataset = df.to_numpy().tolist()
