@@ -40,3 +40,25 @@
 .read-the-docs {
   color: #888;
 } */
+
+th, td {
+  border: 1px solid black;
+}
+
+thead th {
+  width: 25%;
+}
+tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #eee;
+}
+thead {
+	background-color: #333;
+	color: white;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 2%;
+}

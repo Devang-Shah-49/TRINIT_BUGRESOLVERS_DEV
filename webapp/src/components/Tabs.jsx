@@ -2,7 +2,9 @@ import React from "react";
 import { Tab } from "@headlessui/react";
 import Introduction from "./Introduction";
 import FileUpload from "./FileUpload";
+import Dtable from "./Dtable";
 import ViewClusters from "./ViewClusters";
+import Network from "./Network";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -91,11 +93,14 @@ export default function Tabs() {
                 <>
                     {/* Add code/component for tab3 - view clusters */}
                     <ViewClusters />
+                    
                 </>
             </Tab.Panel>
             <Tab.Panel>
                 <>
                     {/* Add code/component for tab4 - docs*/}
+                    <Dtable />
+                    {/* <Network /> */}
                 </>
             </Tab.Panel>
         </Tab.Panels>
