@@ -74,5 +74,5 @@ npm run start
 - [Kunal Joshi](https://github.com/kunalx86)
 - [Sairaaj Surve](https://github.com/SairaajSurve)
 
-Extension of this projecct: https://github.com/Devang-Shah-49/BugResolvers_Datahack
+Extension of this project: https://github.com/Devang-Shah-49/BugResolvers_Datahack
 
