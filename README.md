@@ -5,6 +5,8 @@
 - Dynamic Clustering of data can improve data processing efficiencies manifold. Let’s say there is an entity with the initial set of parameters. The system is expected to group entities based on “similar” parameters. “Similarity” could mean different things for different parameters. For example, if we consider users as the entity.
 - Possible parameters could be: name, date of birth, gender, age, address, etc. Similarity for gender is an exact match, for age is an exact match, whereas, for name, some partial matching algorithm would be used. The rules for clustering should also be easily configurable, we might initially want to cluster based on name only, but moving forward, we might want to cluster based on age as well.
 
+Extension to this project: https://github.com/Devang-Shah-49/BugResolvers_Datahack
+
 ### Project Structure
 - [Frontend - React JS, Vis JS, React-Query, Tailwind CSS, Vite](https://github.com/Devang-Shah-49/TRINIT_BUGRESOLVERS_DEV_04/tree/main/webapp)
 - [Backend - Flask, PyMongo, MongoDB, Node JS, Express JS](https://github.com/Devang-Shah-49/TRINIT_BUGRESOLVERS_DEV_04/tree/main/api/users)
@@ -73,6 +75,3 @@ npm run start
 - [Devang Shah](https://github.com/Devang-Shah-49)
 - [Kunal Joshi](https://github.com/kunalx86)
 - [Sairaaj Surve](https://github.com/SairaajSurve)
-
-Extension of this project: https://github.com/Devang-Shah-49/BugResolvers_Datahack
-
